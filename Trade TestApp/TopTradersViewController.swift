@@ -10,6 +10,7 @@ import UIKit
 final class TopTradersViewController: UIViewController {
     
     var traders = Trader.traders
+    var timer = Timer()
     
     struct Cell {
         static let cell = "TopTradersViewController"
@@ -26,13 +27,8 @@ final class TopTradersViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tableView.reloadData()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        let timer = Timer.scheduledTimer(withTimeInterval: 180, repeats: true) { timer in
-            
+        timer = Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { timer in
+
             let randomIndex = Int.random(in: 1..<self.traders.count)
 
 
@@ -46,6 +42,11 @@ final class TopTradersViewController: UIViewController {
             self.tableView.reloadRows(at: [indexPath], with: .automatic)
         }
         timer.fire()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        timer.invalidate()
     }
     
     private func createNavBarItems() {
