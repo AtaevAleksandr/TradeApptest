@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina6_72" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -16,14 +17,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Back" translatesAutoresizingMaskIntoConstraints="NO" id="8Jc-wB-ZAR">
-                                <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
+                                <rect key="frame" x="0.0" y="0.0" width="432" height="932"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="8Jc-wB-ZAR" secondAttribute="bottom" id="3aR-vL-AaI"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="8Jc-wB-ZAR" secondAttribute="trailing" id="8VB-SR-XYU"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="8Jc-wB-ZAR" secondAttribute="trailing" constant="-2" id="8VB-SR-XYU"/>
                             <constraint firstItem="8Jc-wB-ZAR" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="Fsa-0J-Wrx"/>
                             <constraint firstItem="8Jc-wB-ZAR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Oz4-hr-UQx"/>
                             <constraint firstItem="8Jc-wB-ZAR" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" constant="20" id="VPh-BR-jxS"/>

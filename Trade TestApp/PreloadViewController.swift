@@ -1,18 +1,20 @@
 //
-//  PreLoadViewController.swift
+//  PreloadViewController.swift
 //  Trade TestApp
 //
 //  Created by Aleksandr Ataev on 19.05.2023.
 //
 
 import UIKit
+import UserNotifications
 
-final class PreLoadViewController: UIViewController {
+final class PreloadViewController: UIViewController {
 
-    public let image = UIImage(named: "Back")
+    private let image = UIImage(named: "Back")
     private var progress: Float = 0.0
     private var timer: Timer? = nil
     private let color = UIColor(hex: "60B678")
+    let notificationCenter = UNUserNotificationCenter.current()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +22,7 @@ final class PreLoadViewController: UIViewController {
         setConstraints()
 
         progressView.progress = 0.0
-        timer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 0.07, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
     }
 
     private lazy var backView: UIImageView = {
@@ -54,7 +56,7 @@ final class PreLoadViewController: UIViewController {
         NSLayoutConstraint.activate([
             backView.topAnchor.constraint(equalTo: view.topAnchor),
             backView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            backView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            backView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 2),
             backView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
 
             progressView.centerXAnchor.constraint(equalTo: backView.centerXAnchor),
@@ -82,8 +84,15 @@ final class PreLoadViewController: UIViewController {
             timer?.invalidate()
             timer = nil
 
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                //                self.performSegue(withIdentifier: "nextScreen", sender: self)
+            self.notificationCenter.requestAuthorization(options: [.alert, .sound, .alert]) { (granted, error) in
+                guard granted else { return }
+                self.notificationCenter.getNotificationSettings { (settings) in
+                    guard settings.authorizationStatus == .authorized else { return }
+                }
+            }
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                self.navigationController?.pushViewController(self.createTabBarController(), animated: true)
             }
         }
         updateProgress(progress)
@@ -96,20 +105,3 @@ final class PreLoadViewController: UIViewController {
         progressLabel.text = "\(percent)%"
     }
 }
-
-extension UIColor {
-    convenience init?(hex: String) {
-        var hexString = hex.trimmingCharacters(in: .whitespacesAndNewlines)
-        hexString = hexString.replacingOccurrences(of: "#", with: "")
-
-        var rgbValue: UInt64 = 0
-        Scanner(string: hexString).scanHexInt64(&rgbValue)
-
-        let red = (rgbValue & 0xFF0000) >> 16
-        let green = (rgbValue & 0x00FF00) >> 8
-        let blue = rgbValue & 0x0000FF
-
-        self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1.0)
-    }
-}
-

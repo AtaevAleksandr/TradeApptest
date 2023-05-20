@@ -7,18 +7,30 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5B2CEF6B2A17F3EA002D29C5 /* TopTradersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2CEF6A2A17F3EA002D29C5 /* TopTradersViewController.swift */; };
+		5B2CEF6D2A17F40F002D29C5 /* TradeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2CEF6C2A17F40F002D29C5 /* TradeViewController.swift */; };
+		5B2CEF6F2A17F6F7002D29C5 /* Extension + PreloadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2CEF6E2A17F6F7002D29C5 /* Extension + PreloadViewController.swift */; };
+		5B2CEF712A17F8AA002D29C5 /* Extension + UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2CEF702A17F8AA002D29C5 /* Extension + UIColor.swift */; };
+		5B2CEF732A1825A4002D29C5 /* TopTradersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2CEF722A1825A4002D29C5 /* TopTradersTableViewCell.swift */; };
+		5B2CEF752A18274E002D29C5 /* TopTraders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2CEF742A18274E002D29C5 /* TopTraders.swift */; };
 		5B9D42582A16D5F600519832 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9D42572A16D5F600519832 /* AppDelegate.swift */; };
 		5B9D425A2A16D5F600519832 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9D42592A16D5F600519832 /* SceneDelegate.swift */; };
-		5B9D425C2A16D5F600519832 /* PreLoadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9D425B2A16D5F600519832 /* PreLoadViewController.swift */; };
+		5B9D425C2A16D5F600519832 /* PreloadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9D425B2A16D5F600519832 /* PreloadViewController.swift */; };
 		5B9D42612A16D5F700519832 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B9D42602A16D5F700519832 /* Assets.xcassets */; };
 		5B9D42642A16D5F700519832 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B9D42622A16D5F700519832 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5B2CEF6A2A17F3EA002D29C5 /* TopTradersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTradersViewController.swift; sourceTree = "<group>"; };
+		5B2CEF6C2A17F40F002D29C5 /* TradeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeViewController.swift; sourceTree = "<group>"; };
+		5B2CEF6E2A17F6F7002D29C5 /* Extension + PreloadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + PreloadViewController.swift"; sourceTree = "<group>"; };
+		5B2CEF702A17F8AA002D29C5 /* Extension + UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIColor.swift"; sourceTree = "<group>"; };
+		5B2CEF722A1825A4002D29C5 /* TopTradersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTradersTableViewCell.swift; sourceTree = "<group>"; };
+		5B2CEF742A18274E002D29C5 /* TopTraders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTraders.swift; sourceTree = "<group>"; };
 		5B9D42542A16D5F600519832 /* Trade TestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Trade TestApp.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B9D42572A16D5F600519832 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5B9D42592A16D5F600519832 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		5B9D425B2A16D5F600519832 /* PreLoadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreLoadViewController.swift; sourceTree = "<group>"; };
+		5B9D425B2A16D5F600519832 /* PreloadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreloadViewController.swift; sourceTree = "<group>"; };
 		5B9D42602A16D5F700519832 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5B9D42632A16D5F700519832 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5B9D42652A16D5F700519832 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -56,10 +68,16 @@
 			children = (
 				5B9D42572A16D5F600519832 /* AppDelegate.swift */,
 				5B9D42592A16D5F600519832 /* SceneDelegate.swift */,
-				5B9D425B2A16D5F600519832 /* PreLoadViewController.swift */,
+				5B9D425B2A16D5F600519832 /* PreloadViewController.swift */,
 				5B9D42622A16D5F700519832 /* LaunchScreen.storyboard */,
 				5B9D42602A16D5F700519832 /* Assets.xcassets */,
 				5B9D42652A16D5F700519832 /* Info.plist */,
+				5B2CEF6A2A17F3EA002D29C5 /* TopTradersViewController.swift */,
+				5B2CEF6C2A17F40F002D29C5 /* TradeViewController.swift */,
+				5B2CEF6E2A17F6F7002D29C5 /* Extension + PreloadViewController.swift */,
+				5B2CEF702A17F8AA002D29C5 /* Extension + UIColor.swift */,
+				5B2CEF722A1825A4002D29C5 /* TopTradersTableViewCell.swift */,
+				5B2CEF742A18274E002D29C5 /* TopTraders.swift */,
 			);
 			path = "Trade TestApp";
 			sourceTree = "<group>";
@@ -134,8 +152,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5B9D425C2A16D5F600519832 /* PreLoadViewController.swift in Sources */,
+				5B2CEF6B2A17F3EA002D29C5 /* TopTradersViewController.swift in Sources */,
+				5B9D425C2A16D5F600519832 /* PreloadViewController.swift in Sources */,
 				5B9D42582A16D5F600519832 /* AppDelegate.swift in Sources */,
+				5B2CEF712A17F8AA002D29C5 /* Extension + UIColor.swift in Sources */,
+				5B2CEF752A18274E002D29C5 /* TopTraders.swift in Sources */,
+				5B2CEF6D2A17F40F002D29C5 /* TradeViewController.swift in Sources */,
+				5B2CEF732A1825A4002D29C5 /* TopTradersTableViewCell.swift in Sources */,
+				5B2CEF6F2A17F6F7002D29C5 /* Extension + PreloadViewController.swift in Sources */,
 				5B9D425A2A16D5F600519832 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -282,6 +306,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationPortrait";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -312,6 +337,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationPortrait";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
