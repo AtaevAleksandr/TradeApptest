@@ -11,6 +11,11 @@ import WebKit
 final class TradeViewController: UIViewController, LabelTransferDelegate {
 
     private var stackViewBottomConstraint: NSLayoutConstraint?
+    var betAmount = 1000 {
+        didSet {
+            investmentTextField.text = "\(betAmount)"
+        }
+    }
 
     //MARK: - View Lifecycle
     override func viewDidLoad() {
@@ -19,7 +24,7 @@ final class TradeViewController: UIViewController, LabelTransferDelegate {
         createNavBarItems()
         addSubviews()
         setConstraints()
-        stackViewBottomConstraint = stackViewOfStacks.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16)
+        stackViewBottomConstraint = stackViewOfStacks.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -65)
         stackViewBottomConstraint?.isActive = true
     }
 
@@ -43,23 +48,9 @@ final class TradeViewController: UIViewController, LabelTransferDelegate {
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         navigationController?.navigationBar.compactAppearance = appearance
-        
     }
 
-    //    private lazy var scrollView: UIScrollView = {
-    //        let scrollView = UIScrollView()
-    //        scrollView.showsVerticalScrollIndicator = false
-    //        scrollView.translatesAutoresizingMaskIntoConstraints = false
-    //        return scrollView
-    //    }()
-    //
-    //    private lazy var contentView: UIView = {
-    //        let view = UIView()
-    //        view.sizeToFit()
-    //        view.translatesAutoresizingMaskIntoConstraints = false
-    //        return view
-    //    }()
-
+    //MARK: - Clousers
     private lazy var balanceView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(hex: "343748")
@@ -81,7 +72,7 @@ final class TradeViewController: UIViewController, LabelTransferDelegate {
     lazy var amountLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
-        label.text = "10 000"
+        label.text = "10000"
         label.textAlignment = .center
         label.font = .boldSystemFont(ofSize: 19)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -150,16 +141,21 @@ final class TradeViewController: UIViewController, LabelTransferDelegate {
         let image = UIImage(systemName: "minus.circle")
         button.setImage(image, for: .normal)
         button.tintColor = UIColor(hex: "C1C2C7")
+        button.addTarget(self, action: #selector(minusButtonTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
 
     private lazy var timerTextField: UITextField = {
         let textField = UITextField()
-        textField.text = "00:01"
+        textField.text = "00:00"
         textField.textColor = .white
         textField.font = .boldSystemFont(ofSize: 19)
         textField.keyboardType = .numberPad
+        textField.text = String(format: "%02d:%02d")
+        textField.tag = 0
+        textField.addTarget(self, action: #selector(textFieldDidBeginEditing), for: .editingDidBegin)
+        textField.addTarget(self, action: #selector(textFieldDidEndEditing), for: .editingDidEnd)
         setKeyboardSettings(forUITextField: textField)
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
@@ -170,6 +166,7 @@ final class TradeViewController: UIViewController, LabelTransferDelegate {
         let image = UIImage(systemName: "plus.circle")
         button.setImage(image, for: .normal)
         button.tintColor = UIColor(hex: "C1C2C7")
+        button.addTarget(self, action: #selector(plusButtonTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -197,16 +194,20 @@ final class TradeViewController: UIViewController, LabelTransferDelegate {
         let image = UIImage(systemName: "minus.circle")
         button.setImage(image, for: .normal)
         button.tintColor = UIColor(hex: "C1C2C7")
+        button.addTarget(self, action: #selector(minusTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
 
     private lazy var investmentTextField: UITextField = {
         let textField = UITextField()
-        textField.text = "1,000"
+        textField.text = "1000"
         textField.textColor = .white
         textField.font = .boldSystemFont(ofSize: 19)
         textField.keyboardType = .numberPad
+        textField.tag = 1
+        textField.addTarget(self, action: #selector(textFieldDidBeginEditing), for: .editingDidBegin)
+        textField.addTarget(self, action: #selector(textFieldDidEndEditing), for: .editingDidEnd)
         setKeyboardSettings(forUITextField: textField)
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
@@ -217,6 +218,7 @@ final class TradeViewController: UIViewController, LabelTransferDelegate {
         let image = UIImage(systemName: "plus.circle")
         button.setImage(image, for: .normal)
         button.tintColor = UIColor(hex: "C1C2C7")
+        button.addTarget(self, action: #selector(plusTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -231,6 +233,7 @@ final class TradeViewController: UIViewController, LabelTransferDelegate {
         button.layer.cornerRadius = 10
         button.clipsToBounds = true
         button.layer.masksToBounds = true
+        button.addTarget(self, action: #selector(sellButtonTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -245,6 +248,7 @@ final class TradeViewController: UIViewController, LabelTransferDelegate {
         button.layer.cornerRadius = 10
         button.clipsToBounds = true
         button.layer.masksToBounds = true
+        button.addTarget(self, action: #selector(buyButtonTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -305,8 +309,6 @@ final class TradeViewController: UIViewController, LabelTransferDelegate {
 
     //MARK: - Methods
     private func addSubviews() {
-        //        view.addSubview(scrollView)
-        //        scrollView.addSubview(contentView)
         balanceView.addSubview(stackViewOfBalanceView)
         timerView.addSubview(stackViewOfTimerView)
         investmentView.addSubview(stackViewOfInvestmentView)
@@ -324,16 +326,6 @@ final class TradeViewController: UIViewController, LabelTransferDelegate {
 
     private func setConstraints() {
         NSLayoutConstraint.activate([
-            //            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            //            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
-            //            scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            //            scrollView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            //
-            //            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            //            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            //            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-            //            contentView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor),
-            //            contentView.heightAnchor.constraint(equalTo: scrollView.heightAnchor, constant: 100),
 
             balanceView.topAnchor.constraint(equalTo: view.topAnchor, constant: 150),
             balanceView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
@@ -401,14 +393,14 @@ final class TradeViewController: UIViewController, LabelTransferDelegate {
         guard let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
 
         let keyboardHeight = keyboardFrame.height
-        stackViewBottomConstraint?.constant = -keyboardHeight - 16
+        stackViewBottomConstraint?.constant = -keyboardHeight
         UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded()
         }
     }
 
     @objc private func keyboardDidHide(notification: Notification) {
-        stackViewBottomConstraint?.constant = -16
+        stackViewBottomConstraint?.constant = -65
         UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded()
         }
@@ -417,6 +409,140 @@ final class TradeViewController: UIViewController, LabelTransferDelegate {
     func transferLabel(withText text: String) {
         currencyPairLabel.text = text
     }
+
+    @objc private func minusButtonTapped() {
+        let timeComponents = timerTextField.text!.split(separator: ":")
+        var minutes = Int(timeComponents[0])!
+        var seconds = Int(timeComponents[1])!
+        if seconds == 0 && minutes == 1 {
+            seconds = 59
+            minutes = 0
+        } else if seconds == 0 && minutes > 0 {
+            seconds = 59
+            minutes -= 1
+        } else if seconds == 0 && minutes == 0 {
+            minutes = 0
+            seconds = 0
+        } else {
+            seconds -= 1
+        }
+        timerTextField.text = String(format: "%02d:%02d", minutes, seconds)
+    }
+
+    @objc private func plusButtonTapped() {
+        let timeComponents = timerTextField.text!.split(separator: ":")
+        var minutes = Int(timeComponents[0])!
+        var seconds = Int(timeComponents[1])!
+        if seconds == 59 && minutes == 59 {
+            seconds = 0
+            minutes = 0
+        } else if seconds == 59 {
+            seconds = 0
+            minutes += 1
+        } else {
+            seconds += 1
+        }
+        timerTextField.text = String(format: "%02d:%02d", minutes, seconds)
+    }
+
+    @objc private func minusTapped() {
+        if betAmount > 0 {
+            betAmount -= 100
+        }
+        if betAmount == 0 {
+            betAmount = 0
+        }
+    }
+
+    @objc private func plusTapped() {
+        betAmount += 100
+        if let scoreText = amountLabel.text, let betText = investmentTextField.text {
+            if let score = Int(scoreText), let bet = Int(betText) {
+                if bet > score {
+                    showAlert()
+                }
+            } else {
+                print("One or both values are not integers")
+            }
+        } else {
+            print("One or both values are nil")
+        }
+    }
+
+    @objc private func sellButtonTapped() {
+        let success = Bool.random()
+        if let scoreText = amountLabel.text, let betText = investmentTextField.text {
+            if var score = Int(scoreText), let bet = Int(betText) {
+                if bet > score {
+                    showAlert()
+                } else if score == 0 {
+                    showAlert()
+                    amountLabel.text = "\(score)"
+                }
+                if success {
+                    score += Int(Double(bet) * 1.7)
+                    let alert = UIAlertController(title: "Success!", message: "The bet has been successfully sold. Balance: \(score)", preferredStyle: .alert)
+                    amountLabel.text = "\(score)"
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    present(alert, animated: true, completion: nil)
+                } else {
+                    let alert = UIAlertController(title: "Failure!", message: "The bet is not sold. Balance: \(score)", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    present(alert, animated: true, completion: nil)
+                }
+            } else {
+                print("One or both values are not integers")
+            }
+        } else {
+            print("One or both values are nil")
+        }
+    }
+
+    @objc private func buyButtonTapped() {
+        let success = Bool.random()
+        if let scoreText = amountLabel.text, let betText = investmentTextField.text {
+            if var score = Int(scoreText), let bet = Int(betText) {
+                if bet > score {
+                    showAlert()
+                } else if score == 0 {
+                    showAlert()
+                    amountLabel.text = "\(score)"
+                }
+                if success {
+                    score -= bet
+                    let alert = UIAlertController(title: "Success!", message: "The bet has been successfully purchased. Balance: \(score)", preferredStyle: .alert)
+                    amountLabel.text = "\(score)"
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    present(alert, animated: true, completion: nil)
+                } else {
+                    let alert = UIAlertController(title: "Failure!", message: "The bet is not purchased. Balance: \(score)", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    present(alert, animated: true, completion: nil)
+                }
+            }
+        }
+    }
+
+    @objc internal func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField.tag == 0 {
+            timerView.layer.borderWidth = 1
+            timerView.layer.borderColor = UIColor(hex: "60B678")?.cgColor
+        } else if textField.tag == 1 {
+            investmentView.layer.borderWidth = 1
+            investmentView.layer.borderColor = UIColor(hex: "60B678")?.cgColor
+        }
+    }
+
+    @objc internal func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField.tag == 0 {
+            timerView.layer.borderWidth = 0
+            timerView.layer.borderColor = UIColor.clear.cgColor
+        } else if textField.tag == 1 {
+            investmentView.layer.borderWidth = 0
+            investmentView.layer.borderColor = UIColor.clear.cgColor
+        }
+    }
+
 }
 
 //MARK: - Extension
@@ -424,8 +550,62 @@ extension TradeViewController: UITextFieldDelegate {
     private func setKeyboardSettings(forUITextField textField: UITextField) {
         textField.delegate = self
         textField.autocorrectionType = .no
+
         let tapOnView = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tapOnView)
+    }
+
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        if let text = textField.text, let amount = Int(text) {
+            betAmount = amount
+        }
+    }
+
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+
+        if textField.tag == 0 {
+            let allowedCharacters = CharacterSet(charactersIn: "0123456789")
+            let characterSet = CharacterSet(charactersIn: string)
+            let currentText = textField.text ?? ""
+            let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
+
+            guard characterSet.isSubset(of: allowedCharacters) else {
+                return false
+            }
+
+            let components = newText.components(separatedBy: ":")
+            if components.count > 2 {
+                return false
+            }
+            if components.count == 2 {
+                if components[0].count > 2 || components[1].count > 2 {
+                    return false
+                }
+                if let minutes = Int(components[0]), let seconds = Int(components[1]), minutes < 60 && seconds < 60 {
+                    return true
+                } else {
+                    return false
+                }
+            }
+            if let minutes = Int(newText), minutes < 60 {
+                return true
+            } else {
+                return false
+            }
+        } else if textField.tag == 1 {
+            guard let text = textField.text else { return true }
+            let newLength = text.count + string.count - range.length
+            return newLength <= 5
+        }
+        return true
+    }
+    private func showAlert() {
+        let alertController = UIAlertController(title: "Attention!",
+                                                message: "You don't have enough money! :(", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default)
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion:nil)
+        dismissKeyboard()
     }
 
     @objc private func dismissKeyboard() {
