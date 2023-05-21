@@ -22,7 +22,7 @@ final class PreloadViewController: UIViewController {
         setConstraints()
 
         progressView.progress = 0.0
-        timer = Timer.scheduledTimer(timeInterval: 0.07, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
     }
 
     private lazy var backView: UIImageView = {
@@ -46,7 +46,7 @@ final class PreloadViewController: UIViewController {
     private lazy var progressLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
-        label.font = .boldSystemFont(ofSize: 17)
+        label.font = .boldSystemFont(ofSize: 19)
         label.text = "0%"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label

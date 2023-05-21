@@ -11,35 +11,34 @@ final class TopTradersViewController: UIViewController {
     
     var traders = Trader.traders
     var timer = Timer()
-    
-    struct Cell {
-        static let cell = "TopTradersViewController"
-    }
-    
+
+    //MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(hex: "1D1F2C")
         createNavBarItems()
         view.addSubview(tableView)
         setConstraints()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        timer = Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { timer in
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
 
-            let randomIndex = Int.random(in: 1..<self.traders.count)
+            DispatchQueue.main.async {
+                let randomIndex = Int.random(in: 1..<self.traders.count)
 
+                let deposit = self.traders[randomIndex].deposit + Int.random(in: -150...50)
+                let profit = self.traders[randomIndex].profit + Int.random(in: -150...50)
 
-            let deposit = self.traders[randomIndex].deposit + Int.random(in: -150...50)
-            let profit = self.traders[randomIndex].profit + Int.random(in: -150...50)
+                self.traders[randomIndex].deposit = deposit
+                self.traders[randomIndex].profit = profit
 
-            self.traders[randomIndex].deposit = deposit
-            self.traders[randomIndex].profit = profit
-
-            let indexPath = IndexPath(row: randomIndex, section: 0)
-            self.tableView.reloadRows(at: [indexPath], with: .automatic)
+                let indexPath = IndexPath(row: randomIndex, section: 0)
+                UIView.animate(withDuration: 0.5) { [self] in
+                    self.tableView.reloadRows(at: [indexPath], with: .automatic)
+                }
+            }
         }
         timer.fire()
     }
@@ -48,7 +47,22 @@ final class TopTradersViewController: UIViewController {
         super.viewWillDisappear(animated)
         timer.invalidate()
     }
-    
+
+    //MARK: - Clousers
+    private lazy var tableView: UITableView = {
+        let tableViewList = UITableView(frame: .zero, style: .grouped)
+        tableViewList.translatesAutoresizingMaskIntoConstraints = false
+        tableViewList.register(TopTradersTableViewCell.self, forCellReuseIdentifier: Cell.tableViewCell)
+        tableViewList.dataSource = self
+        tableViewList.delegate = self
+        tableViewList.backgroundColor = .clear
+        tableViewList.showsVerticalScrollIndicator = false
+        tableViewList.separatorStyle = .none
+        tableViewList.isScrollEnabled = false
+        return tableViewList
+    }()
+
+    //MARK: - Methods
     private func createNavBarItems() {
         navigationItem.title = "TOP 10 Traders"
         let appearance = UINavigationBarAppearance()
@@ -59,25 +73,13 @@ final class TopTradersViewController: UIViewController {
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         navigationController?.navigationBar.compactAppearance = appearance
-        
+
         let tabAppearance = UITabBarAppearance()
         tabAppearance.backgroundColor = UIColor(hex: "20222E")
         tabBarController?.tabBar.standardAppearance = tabAppearance
         tabBarController?.tabBar.scrollEdgeAppearance = tabAppearance
-        
     }
-    
-    private lazy var tableView: UITableView = {
-        let tableViewList = UITableView(frame: .zero, style: .grouped)
-        tableViewList.translatesAutoresizingMaskIntoConstraints = false
-        tableViewList.register(TopTradersTableViewCell.self, forCellReuseIdentifier: Cell.cell)
-        tableViewList.dataSource = self
-        tableViewList.delegate = self
-        tableViewList.backgroundColor = .clear
-        tableViewList.showsVerticalScrollIndicator = false
-        return tableViewList
-    }()
-    
+
     private func setConstraints() {
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -94,7 +96,7 @@ extension TopTradersViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Cell.cell) as! TopTradersTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: Cell.tableViewCell) as! TopTradersTableViewCell
         cell.selectionStyle = .none
         if indexPath.row % 2 == 0 {
             cell.backgroundColor = UIColor(hex: "2E303D")

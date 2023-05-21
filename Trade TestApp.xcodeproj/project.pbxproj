@@ -7,12 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5B1F33F32A199F910018DB47 /* CurrencyPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1F33F22A199F910018DB47 /* CurrencyPair.swift */; };
+		5B1F33F52A199FBF0018DB47 /* CurrencyPairViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1F33F42A199FBF0018DB47 /* CurrencyPairViewController.swift */; };
+		5B1F33F72A199FE30018DB47 /* CurrencyPairCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1F33F62A199FE30018DB47 /* CurrencyPairCollectionViewCell.swift */; };
 		5B2CEF6B2A17F3EA002D29C5 /* TopTradersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2CEF6A2A17F3EA002D29C5 /* TopTradersViewController.swift */; };
 		5B2CEF6D2A17F40F002D29C5 /* TradeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2CEF6C2A17F40F002D29C5 /* TradeViewController.swift */; };
 		5B2CEF6F2A17F6F7002D29C5 /* Extension + PreloadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2CEF6E2A17F6F7002D29C5 /* Extension + PreloadViewController.swift */; };
 		5B2CEF712A17F8AA002D29C5 /* Extension + UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2CEF702A17F8AA002D29C5 /* Extension + UIColor.swift */; };
 		5B2CEF732A1825A4002D29C5 /* TopTradersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2CEF722A1825A4002D29C5 /* TopTradersTableViewCell.swift */; };
 		5B2CEF752A18274E002D29C5 /* TopTraders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2CEF742A18274E002D29C5 /* TopTraders.swift */; };
+		5B7352CC2A19AFD300E4948E /* CellsID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7352CB2A19AFD300E4948E /* CellsID.swift */; };
+		5B7352CF2A19C04B00E4948E /* Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7352CE2A19C04B00E4948E /* Protocol.swift */; };
 		5B9D42582A16D5F600519832 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9D42572A16D5F600519832 /* AppDelegate.swift */; };
 		5B9D425A2A16D5F600519832 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9D42592A16D5F600519832 /* SceneDelegate.swift */; };
 		5B9D425C2A16D5F600519832 /* PreloadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9D425B2A16D5F600519832 /* PreloadViewController.swift */; };
@@ -21,12 +26,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5B1F33F22A199F910018DB47 /* CurrencyPair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyPair.swift; sourceTree = "<group>"; };
+		5B1F33F42A199FBF0018DB47 /* CurrencyPairViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyPairViewController.swift; sourceTree = "<group>"; };
+		5B1F33F62A199FE30018DB47 /* CurrencyPairCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyPairCollectionViewCell.swift; sourceTree = "<group>"; };
 		5B2CEF6A2A17F3EA002D29C5 /* TopTradersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTradersViewController.swift; sourceTree = "<group>"; };
 		5B2CEF6C2A17F40F002D29C5 /* TradeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeViewController.swift; sourceTree = "<group>"; };
 		5B2CEF6E2A17F6F7002D29C5 /* Extension + PreloadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + PreloadViewController.swift"; sourceTree = "<group>"; };
 		5B2CEF702A17F8AA002D29C5 /* Extension + UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIColor.swift"; sourceTree = "<group>"; };
 		5B2CEF722A1825A4002D29C5 /* TopTradersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTradersTableViewCell.swift; sourceTree = "<group>"; };
 		5B2CEF742A18274E002D29C5 /* TopTraders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTraders.swift; sourceTree = "<group>"; };
+		5B7352CB2A19AFD300E4948E /* CellsID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellsID.swift; sourceTree = "<group>"; };
+		5B7352CE2A19C04B00E4948E /* Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocol.swift; sourceTree = "<group>"; };
 		5B9D42542A16D5F600519832 /* Trade TestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Trade TestApp.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B9D42572A16D5F600519832 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5B9D42592A16D5F600519832 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -47,6 +57,63 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5B05E1142A19558E00B6EA22 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				5B9D42572A16D5F600519832 /* AppDelegate.swift */,
+				5B9D42592A16D5F600519832 /* SceneDelegate.swift */,
+				5B9D42622A16D5F700519832 /* LaunchScreen.storyboard */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		5B05E1152A1955A300B6EA22 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				5B9D425B2A16D5F600519832 /* PreloadViewController.swift */,
+				5B2CEF6A2A17F3EA002D29C5 /* TopTradersViewController.swift */,
+				5B2CEF6C2A17F40F002D29C5 /* TradeViewController.swift */,
+				5B1F33F42A199FBF0018DB47 /* CurrencyPairViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		5B05E1162A1955F600B6EA22 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5B2CEF742A18274E002D29C5 /* TopTraders.swift */,
+				5B1F33F22A199F910018DB47 /* CurrencyPair.swift */,
+				5B7352CB2A19AFD300E4948E /* CellsID.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5B05E1172A19562500B6EA22 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				5B2CEF722A1825A4002D29C5 /* TopTradersTableViewCell.swift */,
+				5B1F33F62A199FE30018DB47 /* CurrencyPairCollectionViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		5B05E1182A19563500B6EA22 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				5B2CEF6E2A17F6F7002D29C5 /* Extension + PreloadViewController.swift */,
+				5B2CEF702A17F8AA002D29C5 /* Extension + UIColor.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		5B7352CD2A19C01000E4948E /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				5B7352CE2A19C04B00E4948E /* Protocol.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
 		5B9D424B2A16D5F600519832 = {
 			isa = PBXGroup;
 			children = (
@@ -66,18 +133,14 @@
 		5B9D42562A16D5F600519832 /* Trade TestApp */ = {
 			isa = PBXGroup;
 			children = (
-				5B9D42572A16D5F600519832 /* AppDelegate.swift */,
-				5B9D42592A16D5F600519832 /* SceneDelegate.swift */,
-				5B9D425B2A16D5F600519832 /* PreloadViewController.swift */,
-				5B9D42622A16D5F700519832 /* LaunchScreen.storyboard */,
+				5B05E1142A19558E00B6EA22 /* App */,
+				5B7352CD2A19C01000E4948E /* Helper */,
+				5B05E1152A1955A300B6EA22 /* Controllers */,
+				5B05E1162A1955F600B6EA22 /* Model */,
+				5B05E1172A19562500B6EA22 /* Cell */,
+				5B05E1182A19563500B6EA22 /* Extensions */,
 				5B9D42602A16D5F700519832 /* Assets.xcassets */,
 				5B9D42652A16D5F700519832 /* Info.plist */,
-				5B2CEF6A2A17F3EA002D29C5 /* TopTradersViewController.swift */,
-				5B2CEF6C2A17F40F002D29C5 /* TradeViewController.swift */,
-				5B2CEF6E2A17F6F7002D29C5 /* Extension + PreloadViewController.swift */,
-				5B2CEF702A17F8AA002D29C5 /* Extension + UIColor.swift */,
-				5B2CEF722A1825A4002D29C5 /* TopTradersTableViewCell.swift */,
-				5B2CEF742A18274E002D29C5 /* TopTraders.swift */,
 			);
 			path = "Trade TestApp";
 			sourceTree = "<group>";
@@ -153,12 +216,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				5B2CEF6B2A17F3EA002D29C5 /* TopTradersViewController.swift in Sources */,
+				5B7352CC2A19AFD300E4948E /* CellsID.swift in Sources */,
+				5B1F33F52A199FBF0018DB47 /* CurrencyPairViewController.swift in Sources */,
+				5B7352CF2A19C04B00E4948E /* Protocol.swift in Sources */,
 				5B9D425C2A16D5F600519832 /* PreloadViewController.swift in Sources */,
+				5B1F33F32A199F910018DB47 /* CurrencyPair.swift in Sources */,
 				5B9D42582A16D5F600519832 /* AppDelegate.swift in Sources */,
 				5B2CEF712A17F8AA002D29C5 /* Extension + UIColor.swift in Sources */,
 				5B2CEF752A18274E002D29C5 /* TopTraders.swift in Sources */,
 				5B2CEF6D2A17F40F002D29C5 /* TradeViewController.swift in Sources */,
 				5B2CEF732A1825A4002D29C5 /* TopTradersTableViewCell.swift in Sources */,
+				5B1F33F72A199FE30018DB47 /* CurrencyPairCollectionViewCell.swift in Sources */,
 				5B2CEF6F2A17F6F7002D29C5 /* Extension + PreloadViewController.swift in Sources */,
 				5B9D425A2A16D5F600519832 /* SceneDelegate.swift in Sources */,
 			);

@@ -106,6 +106,4 @@ final class TopTradersTableViewCell: UITableViewCell {
             depositLabel.text = "$\(elements.deposit)"
             profitLabel.text = "$\(elements.profit)"
         }
-
-
 }

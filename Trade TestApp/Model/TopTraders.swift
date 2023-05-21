@@ -27,5 +27,6 @@ extension Trader {
                                     Trader(number: 7, country: "🇫🇷", name: "George", deposit: 1608, profit: 11121),
                                     Trader(number: 8, country: "🇪🇸", name: "William", deposit: 1120, profit: 9987),
                                     Trader(number: 9, country: "🇮🇹", name: "James", deposit: 995, profit: 8624),
-                                    Trader(number: 10, country: "🇬🇧", name: "Tom", deposit: 556, profit: 4516)]
+                                    Trader(number: 10, country: "🇬🇧", name: "Tom", deposit: 556, profit: 4516)
+    ]
 }
