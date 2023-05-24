@@ -35,8 +35,8 @@ final class TopTradersViewController: UIViewController {
                 self.traders[randomIndex].profit = profit
 
                 let indexPath = IndexPath(row: randomIndex, section: 0)
-                UIView.animate(withDuration: 0.5) { [self] in
-                    self.tableView.reloadRows(at: [indexPath], with: .automatic)
+                UIView.animate(withDuration: 1) { [self] in
+                    self.tableView.reloadRows(at: [indexPath], with: .fade)
                 }
             }
         }

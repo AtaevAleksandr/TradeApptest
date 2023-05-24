@@ -13,6 +13,7 @@ class CurrencyPairViewController: UIViewController, UIGestureRecognizerDelegate 
     weak var delegate: LabelTransferDelegate?
     var selectedPair: CurrencyPair?
     weak var delegatePair: CurrencyPairSelectionDelegate?
+    var selectedIndexPath: IndexPath?
 
     //MARK: - View Lifecycle
     override func viewDidLoad() {
@@ -62,7 +63,7 @@ class CurrencyPairViewController: UIViewController, UIGestureRecognizerDelegate 
 
     private func setConstraints() {
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
+            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 37),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -37),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
@@ -93,7 +94,19 @@ extension CurrencyPairViewController: UICollectionViewDelegate, UICollectionView
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedPair = currencyPairs[indexPath.item]
         delegate?.transferLabel(withText: selectedPair!.name)
-        
+
+        if let selectedIndexPath = selectedIndexPath {
+            if let cell = collectionView.cellForItem(at: selectedIndexPath) as? CurrencyPairCollectionViewCell {
+                cell.currencyPairView.backgroundColor = UIColor(hex: "343748")
+            }
+        }
+
+        if let cell = collectionView.cellForItem(at: indexPath) as? CurrencyPairCollectionViewCell {
+            cell.currencyPairView.backgroundColor = UIColor(hex: "60B678")
+        }
+        selectedIndexPath = indexPath
+
+
         guard let selectedPair = selectedPair else { return }
         delegatePair?.didSelect(currencyPairSymbol: selectedPair.symbol)
         navigationController?.popViewController(animated: true)
