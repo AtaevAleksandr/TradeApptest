@@ -11,7 +11,8 @@ class CurrencyPairViewController: UIViewController, UIGestureRecognizerDelegate 
 
     var currencyPairs = CurrencyPair.currencyPairs
     weak var delegate: LabelTransferDelegate?
-
+    var selectedPair: CurrencyPair?
+    weak var delegatePair: CurrencyPairSelectionDelegate?
 
     //MARK: - View Lifecycle
     override func viewDidLoad() {
@@ -19,8 +20,9 @@ class CurrencyPairViewController: UIViewController, UIGestureRecognizerDelegate 
         view.backgroundColor = UIColor(hex: "131628")
         createNavBarItems()
         view.addSubview(collectionView)
-        collectionView.dataSource = self
         collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.reloadData()
         setConstraints()
     }
 
@@ -84,14 +86,16 @@ extension CurrencyPairViewController: UICollectionViewDelegate, UICollectionView
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Cell.collectionViewCell, for: indexPath) as! CurrencyPairCollectionViewCell
         let pairs = currencyPairs[indexPath.item]
-        cell.set(pairs)
+        cell.setName(pairs)
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let selectionItem = currencyPairs[indexPath.item]
-        delegate?.transferLabel(withText: selectionItem.pair)
+        selectedPair = currencyPairs[indexPath.item]
+        delegate?.transferLabel(withText: selectedPair!.name)
+        
+        guard let selectedPair = selectedPair else { return }
+        delegatePair?.didSelect(currencyPairSymbol: selectedPair.symbol)
         navigationController?.popViewController(animated: true)
-        collectionView.reloadData()
     }
 }

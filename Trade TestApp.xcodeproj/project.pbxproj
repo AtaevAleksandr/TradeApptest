@@ -23,6 +23,8 @@
 		5B9D425C2A16D5F600519832 /* PreloadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9D425B2A16D5F600519832 /* PreloadViewController.swift */; };
 		5B9D42612A16D5F700519832 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B9D42602A16D5F700519832 /* Assets.xcassets */; };
 		5B9D42642A16D5F700519832 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B9D42622A16D5F700519832 /* LaunchScreen.storyboard */; };
+		5BA17BB92A1A991600693949 /* HTMLString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA17BB82A1A991600693949 /* HTMLString.swift */; };
+		5BA17BBB2A1AB16600693949 /* ProtocolPairSelected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA17BBA2A1AB16600693949 /* ProtocolPairSelected.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +46,8 @@
 		5B9D42602A16D5F700519832 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5B9D42632A16D5F700519832 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5B9D42652A16D5F700519832 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5BA17BB82A1A991600693949 /* HTMLString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLString.swift; sourceTree = "<group>"; };
+		5BA17BBA2A1AB16600693949 /* ProtocolPairSelected.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolPairSelected.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +114,8 @@
 			isa = PBXGroup;
 			children = (
 				5B7352CE2A19C04B00E4948E /* Protocol.swift */,
+				5BA17BB82A1A991600693949 /* HTMLString.swift */,
+				5BA17BBA2A1AB16600693949 /* ProtocolPairSelected.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -217,6 +223,7 @@
 			files = (
 				5B2CEF6B2A17F3EA002D29C5 /* TopTradersViewController.swift in Sources */,
 				5B7352CC2A19AFD300E4948E /* CellsID.swift in Sources */,
+				5BA17BB92A1A991600693949 /* HTMLString.swift in Sources */,
 				5B1F33F52A199FBF0018DB47 /* CurrencyPairViewController.swift in Sources */,
 				5B7352CF2A19C04B00E4948E /* Protocol.swift in Sources */,
 				5B9D425C2A16D5F600519832 /* PreloadViewController.swift in Sources */,
@@ -226,6 +233,7 @@
 				5B2CEF752A18274E002D29C5 /* TopTraders.swift in Sources */,
 				5B2CEF6D2A17F40F002D29C5 /* TradeViewController.swift in Sources */,
 				5B2CEF732A1825A4002D29C5 /* TopTradersTableViewCell.swift in Sources */,
+				5BA17BBB2A1AB16600693949 /* ProtocolPairSelected.swift in Sources */,
 				5B1F33F72A199FE30018DB47 /* CurrencyPairCollectionViewCell.swift in Sources */,
 				5B2CEF6F2A17F6F7002D29C5 /* Extension + PreloadViewController.swift in Sources */,
 				5B9D425A2A16D5F600519832 /* SceneDelegate.swift in Sources */,

@@ -8,7 +8,7 @@
 import UIKit
 import WebKit
 
-final class TradeViewController: UIViewController, LabelTransferDelegate {
+final class TradeViewController: UIViewController, LabelTransferDelegate, WKNavigationDelegate, CurrencyPairSelectionDelegate {
 
     private var stackViewBottomConstraint: NSLayoutConstraint?
     var betAmount = 1000 {
@@ -16,6 +16,10 @@ final class TradeViewController: UIViewController, LabelTransferDelegate {
             investmentTextField.text = "\(betAmount)"
         }
     }
+    let htmlString = HTMLUrl.htmlString
+
+    var selectedPair: CurrencyPair?
+    var currencyPairs = CurrencyPair.currencyPairs
 
     //MARK: - View Lifecycle
     override func viewDidLoad() {
@@ -24,7 +28,7 @@ final class TradeViewController: UIViewController, LabelTransferDelegate {
         createNavBarItems()
         addSubviews()
         setConstraints()
-        stackViewBottomConstraint = stackViewOfStacks.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -65)
+        stackViewBottomConstraint = stackViewOfStacks.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -13)
         stackViewBottomConstraint?.isActive = true
     }
 
@@ -82,10 +86,10 @@ final class TradeViewController: UIViewController, LabelTransferDelegate {
     private lazy var tradeChartView: WKWebView = {
         let view = WKWebView()
         view.backgroundColor = .gray
-        view.layer.borderColor = UIColor.white.cgColor
-        view.layer.borderWidth = 0.5
         view.clipsToBounds = true
+        view.navigationDelegate = self
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.loadHTMLString(htmlString, baseURL: nil)
         return view
     }()
 
@@ -100,7 +104,7 @@ final class TradeViewController: UIViewController, LabelTransferDelegate {
     lazy var currencyPairLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
-        label.text = "RUB / USD"
+        label.text = "EUR / USD"
         label.textAlignment = .center
         label.font = .boldSystemFont(ofSize: 20)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -400,14 +404,39 @@ final class TradeViewController: UIViewController, LabelTransferDelegate {
     }
 
     @objc private func keyboardDidHide(notification: Notification) {
-        stackViewBottomConstraint?.constant = -65
+        stackViewBottomConstraint?.constant = -13
         UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded()
         }
     }
 
     func transferLabel(withText text: String) {
+        print(#function)
         currencyPairLabel.text = text
+    }
+
+    func updateWebView() {
+        print(#function)
+        guard let selectedCurrencyPair = currencyPairs.first(where: { $0.symbol == selectedPair?.symbol }) else {
+            return
+        }
+        print(selectedCurrencyPair.symbol)
+
+        let urlString = "https://www.tradingview.com/chart/?symbol=FX%3A\(selectedCurrencyPair.symbol)"
+        print(urlString)
+        if let url = URL(string: urlString) {
+            let request = URLRequest(url: url)
+            tradeChartView.load(request)
+        }
+        tradeChartView.reload()
+    }
+
+    func didSelect(currencyPairSymbol: String) {
+        print(#function)
+//        print(selectedPair?.symbol ?? "HUI")
+//        selectedPair?.symbol = currencyPairSymbol
+        updateWebView()
+//        print(currencyPairSymbol)
     }
 
     @objc private func minusButtonTapped() {
@@ -542,7 +571,6 @@ final class TradeViewController: UIViewController, LabelTransferDelegate {
             investmentView.layer.borderColor = UIColor.clear.cgColor
         }
     }
-
 }
 
 //MARK: - Extension

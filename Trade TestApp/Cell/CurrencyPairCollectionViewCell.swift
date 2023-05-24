@@ -32,7 +32,7 @@ class CurrencyPairCollectionViewCell: UICollectionViewCell {
     lazy var currencyPairLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
-        label.text = "RUB / USD"
+        label.text = "EUR / USD"
         label.textAlignment = .center
         label.font = .boldSystemFont(ofSize: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -52,7 +52,7 @@ class CurrencyPairCollectionViewCell: UICollectionViewCell {
         ])
     }
 
-    func set(_ elements: CurrencyPair) {
-        currencyPairLabel.text = elements.pair
+    func setName(_ name: CurrencyPair) {
+        currencyPairLabel.text = name.name
     }
 }

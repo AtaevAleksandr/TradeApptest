@@ -22,7 +22,10 @@ final class PreloadViewController: UIViewController {
         setConstraints()
 
         progressView.progress = 0.0
-        timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            self.timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(self.updateTimer), userInfo: nil, repeats: true)
+        }
     }
 
     private lazy var backView: UIImageView = {
