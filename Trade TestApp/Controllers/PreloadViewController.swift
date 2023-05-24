@@ -64,9 +64,9 @@ final class PreloadViewController: UIViewController {
 
             progressView.centerXAnchor.constraint(equalTo: backView.centerXAnchor),
             progressView.centerYAnchor.constraint(equalTo: backView.centerYAnchor),
-            progressView.leadingAnchor.constraint(equalTo: backView.leadingAnchor, constant: 37),
-            progressView.trailingAnchor.constraint(equalTo: backView.trailingAnchor, constant: -37),
-            progressView.heightAnchor.constraint(equalToConstant: 24),
+            progressView.leadingAnchor.constraint(equalTo: backView.leadingAnchor, constant: 20),
+            progressView.trailingAnchor.constraint(equalTo: backView.trailingAnchor, constant: -20),
+            progressView.heightAnchor.constraint(equalToConstant: 25),
 
             progressLabel.centerXAnchor.constraint(equalTo: progressView.centerXAnchor),
             progressLabel.centerYAnchor.constraint(equalTo: progressView.centerYAnchor),

@@ -86,6 +86,7 @@ final class TradeViewController: UIViewController, LabelTransferDelegate, WKNavi
     private lazy var tradeChartView: WKWebView = {
         let view = WKWebView()
         view.backgroundColor = .gray
+        view.layer.cornerRadius = 10
         view.clipsToBounds = true
         view.navigationDelegate = self
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -332,21 +333,21 @@ final class TradeViewController: UIViewController, LabelTransferDelegate, WKNavi
         NSLayoutConstraint.activate([
 
             balanceView.topAnchor.constraint(equalTo: view.topAnchor, constant: 150),
-            balanceView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
-            balanceView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
+            balanceView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
+            balanceView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
             balanceView.heightAnchor.constraint(equalToConstant: 54),
 
             stackViewOfBalanceView.centerXAnchor.constraint(equalTo: balanceView.centerXAnchor),
             stackViewOfBalanceView.centerYAnchor.constraint(equalTo: balanceView.centerYAnchor),
 
-            tradeChartView.topAnchor.constraint(equalTo: balanceView.bottomAnchor, constant: 25),
-            tradeChartView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tradeChartView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tradeChartView.topAnchor.constraint(equalTo: balanceView.bottomAnchor, constant: 15),
+            tradeChartView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
+            tradeChartView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
             tradeChartView.heightAnchor.constraint(equalToConstant: 320),
 
-            stackViewOfStacks.topAnchor.constraint(equalTo: tradeChartView.bottomAnchor, constant: 16),
-            stackViewOfStacks.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
-            stackViewOfStacks.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
+            stackViewOfStacks.topAnchor.constraint(equalTo: tradeChartView.bottomAnchor, constant: 15),
+            stackViewOfStacks.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
+            stackViewOfStacks.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
 
             currencyPairView.heightAnchor.constraint(equalToConstant: 54),
 
