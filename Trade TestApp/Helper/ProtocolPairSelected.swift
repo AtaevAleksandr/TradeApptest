@@ -8,5 +8,5 @@
 import Foundation
 
 protocol CurrencyPairSelectionDelegate: AnyObject {
-    func didSelect(currencyPairSymbol: String)
+    func didSelectCurrencySymbol(_ currencyPairSymbol: String)
 }

@@ -106,9 +106,7 @@ extension CurrencyPairViewController: UICollectionViewDelegate, UICollectionView
         }
         selectedIndexPath = indexPath
 
-
-        guard let selectedPair = selectedPair else { return }
-        delegatePair?.didSelect(currencyPairSymbol: selectedPair.symbol)
+        delegatePair?.didSelectCurrencySymbol(selectedPair!.symbol)
         navigationController?.popViewController(animated: true)
     }
 }

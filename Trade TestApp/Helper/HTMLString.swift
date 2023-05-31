@@ -9,7 +9,7 @@ import Foundation
 
 struct HTMLUrl {
 
-    static var pair = CurrencyPair.currencyPairs
+    static var pair = CurrencyPair.currencyPairs.first
     static var htmlString = """
                 <html>
                 <head>
@@ -21,7 +21,7 @@ struct HTMLUrl {
                     new TradingView.widget(
                 {
                 "autosize": true,
-                "symbol": "\(pair[0].symbol)",
+                "symbol": "\(pair?.symbol ?? "Error")",
                 "interval": "D",
                 "timezone": "Etc/UTC",
                 "theme": "light",

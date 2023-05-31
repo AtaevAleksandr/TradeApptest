@@ -8,7 +8,7 @@
 import UIKit
 import WebKit
 
-final class TradeViewController: UIViewController, LabelTransferDelegate, WKNavigationDelegate, CurrencyPairSelectionDelegate {
+final class TradeViewController: UIViewController, LabelTransferDelegate, CurrencyPairSelectionDelegate {
 
     private var stackViewBottomConstraint: NSLayoutConstraint?
     var betAmount = 1000 {
@@ -17,9 +17,6 @@ final class TradeViewController: UIViewController, LabelTransferDelegate, WKNavi
         }
     }
     let htmlString = HTMLUrl.htmlString
-
-    var selectedPair: CurrencyPair?
-    var currencyPairs = CurrencyPair.currencyPairs
 
     //MARK: - View Lifecycle
     override func viewDidLoad() {
@@ -83,14 +80,23 @@ final class TradeViewController: UIViewController, LabelTransferDelegate, WKNavi
         return label
     }()
 
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.color = UIColor(hex: "60B678")
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        return activityIndicator
+    }()
+
     private lazy var tradeChartView: WKWebView = {
         let view = WKWebView()
-        view.backgroundColor = .gray
         view.layer.cornerRadius = 10
         view.clipsToBounds = true
         view.navigationDelegate = self
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.loadHTMLString(htmlString, baseURL: nil)
+        DispatchQueue.main.async {
+            self.activityIndicator.startAnimating()
+            view.loadHTMLString(self.htmlString, baseURL: nil)
+        }
         return view
     }()
 
@@ -320,6 +326,7 @@ final class TradeViewController: UIViewController, LabelTransferDelegate, WKNavi
         [timerLabel].forEach { timerView.addSubview($0) }
         [investmentLabel].forEach { investmentView.addSubview($0) }
         [currencyPairLabel, chooseCurrencyPairButton].forEach { currencyPairView.addSubview($0) }
+        tradeChartView.addSubview(activityIndicator)
         [balanceView, tradeChartView, stackViewOfStacks].forEach { view.addSubview($0) }
         [balanceLabel, amountLabel].forEach { stackViewOfBalanceView.addArrangedSubview($0) }
         [timerView, investmentView].forEach { stackViewOfTwoViews.addArrangedSubview($0) }
@@ -344,6 +351,9 @@ final class TradeViewController: UIViewController, LabelTransferDelegate, WKNavi
             tradeChartView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
             tradeChartView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
             tradeChartView.heightAnchor.constraint(equalToConstant: 320),
+
+            activityIndicator.centerXAnchor.constraint(equalTo: tradeChartView.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: tradeChartView.centerYAnchor),
 
             stackViewOfStacks.topAnchor.constraint(equalTo: tradeChartView.bottomAnchor, constant: 15),
             stackViewOfStacks.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
@@ -380,6 +390,7 @@ final class TradeViewController: UIViewController, LabelTransferDelegate, WKNavi
     @objc private func goToPairs() {
         let vc = CurrencyPairViewController()
         vc.delegate = self
+        vc.delegatePair = self
         navigationController?.pushViewController(vc, animated: true)
     }
 
@@ -412,32 +423,38 @@ final class TradeViewController: UIViewController, LabelTransferDelegate, WKNavi
     }
 
     func transferLabel(withText text: String) {
-        print(#function)
         currencyPairLabel.text = text
     }
 
-    func updateWebView() {
-        print(#function)
-        guard let selectedCurrencyPair = currencyPairs.first(where: { $0.symbol == selectedPair?.symbol }) else {
-            return
-        }
-        print(selectedCurrencyPair.symbol)
-
-        let urlString = "https://www.tradingview.com/chart/?symbol=FX%3A\(selectedCurrencyPair.symbol)"
-        print(urlString)
-        if let url = URL(string: urlString) {
-            let request = URLRequest(url: url)
-            tradeChartView.load(request)
-        }
-        tradeChartView.reload()
-    }
-
-    func didSelect(currencyPairSymbol: String) {
-        print(#function)
-//        print(selectedPair?.symbol ?? "HUI")
-//        selectedPair?.symbol = currencyPairSymbol
-        updateWebView()
-//        print(currencyPairSymbol)
+    func didSelectCurrencySymbol(_ currencyPairSymbol: String) {
+        let urlString = """
+                <html>
+                <head>
+                <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+                </head>
+                <div class="tradingview-widget-container">
+                    <div id="tradingview_a9d18"></div>
+                    <script type="text/javascript">
+                    new TradingView.widget(
+                {
+                "autosize": true,
+                "symbol": "\(currencyPairSymbol)",
+                "interval": "D",
+                "timezone": "Etc/UTC",
+                "theme": "light",
+                "style": "1",
+                "locale": "en",
+                "toolbar_bg": "#f1f3f6",
+                "enable_publishing": false,
+                "allow_symbol_change": true,
+                "container_id": "tradingview_80ff7"
+                }
+                    );
+                    </script>
+                </div>
+                </html>
+                """
+        tradeChartView.loadHTMLString(urlString, baseURL: nil)
     }
 
     @objc private func minusButtonTapped() {
@@ -639,5 +656,17 @@ extension TradeViewController: UITextFieldDelegate {
 
     @objc private func dismissKeyboard() {
         view.endEditing(true)
+    }
+}
+
+extension TradeViewController: WKNavigationDelegate {
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        activityIndicator.stopAnimating()
+        activityIndicator.isHidden = true
+    }
+
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        activityIndicator.stopAnimating()
+        activityIndicator.isHidden = true
     }
 }
